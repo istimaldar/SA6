@@ -30,3 +30,18 @@ else
         fprintf('%d > %d\n', phi, x_right);
     end
 end
+sx = (1 / (n - 1)) * sum(power(X - x, 2));
+sy = (1 / (m - 1)) * sum(power(Y - y, 2));
+phi = (x - y) / sqrt((1 / n + 1 / m) * ((n - 1) * sx + (m - 1) * sy) / (n + m - 2));
+disp('Проверка гипотезы о равенстве математических ожиданий двух генеральных совокупностей для неизвестных дисперсий: ');
+if phi > x_left && phi < x_right
+    disp('Гипотеза подтверждена.');
+    fprintf('%d < %d < %d\n', x_left, phi, x_right);
+else
+    disp('Гипотеза опровергнута.');
+    if phi < x_left
+        fprintf('%d < %d\n', phi, x_left);
+    else
+        fprintf('%d > %d\n', phi, x_right);
+    end
+end
