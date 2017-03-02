@@ -16,3 +16,25 @@ end
 years = str2double(years);
 clear a;
 clear i;
+regres = regress(uk.', [years; ones(1,length(years))].');
+y = years * regres(1) + regres(2);
+figure
+subplot(2,1,1)
+plot(years, uk, '.', years, y)
+xlabel('Год')
+ylabel('Продолжительность жизни')
+title('UK')
+regres = regress(england.', [years; ones(1,length(years))].');
+y = years * regres(1) + regres(2);
+subplot(2,1,2)
+plot(years, england, '.', years, y)
+xlabel('Год')
+ylabel('Продолжительность жизни')
+title('England')
+disp('Коэффициенты корреляции: ');
+R = corrcoef(years, uk);
+fprintf('UK и года: %d\n', R(1,2))
+R = corrcoef(years, england);
+fprintf('England и года: %d\n', R(1,2))
+R = corrcoef(uk, england);
+fprintf('England и uk: %d\n', R(1,2))
